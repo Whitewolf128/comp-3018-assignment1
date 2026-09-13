@@ -1,0 +1,23 @@
+1. git init
+2. git clone https://github.com/Whitewolf128/comp-3018-assignment1.git
+3. git remote add origin https://github.com/Whitewolf128/comp-3018-assignment1.git
+4. git add .
+5. git commit -m "Initial commit"
+6.git push -u origin main
+
+if it does not work.
+1.git pull origin main
+
+install node.js and npm
+1.npm init -y
+2.npm install typescript@6 --save-dev
+3.npm install express
+4.npm install @types/express --save-dev
+5.npm install jest ts-jest @types/jest supertest @types/supertest --save-dev
+
+add to tsconfig.json
+"rootDir": "src",
+"types": ["node"],
+
+
+
