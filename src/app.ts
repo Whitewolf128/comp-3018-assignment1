@@ -18,6 +18,7 @@ app.get("/api/v1/health", (req, res) => {
         version: "1.0.0",
     });
 });
-app.use("/api/v1/portfolio/performance", calculatePortfolioPerformance);
+
+app.get("/api/v1/portfolio/performance", calculatePortfolioPerformance);
 // export app and server for testing
 export default app;
