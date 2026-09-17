@@ -11,6 +11,7 @@ if it does not work.
 install node.js and npm
 1.npm init -y
 2.npm install typescript@6 --save-dev
+npm install typescript ts-node @types/node --save-dev
 3.npm install express
 4.npm install @types/express --save-dev
 5.npm install jest ts-jest @types/jest supertest @types/supertest --save-dev
@@ -19,5 +20,5 @@ add to tsconfig.json
 "rootDir": "src",
 "types": ["node"],
 
-
+Source for switch case expression: https://www.xjavascript.com/blog/typescript-switch-expression/
 

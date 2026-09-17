@@ -1,7 +1,7 @@
 // import the express application and type definition
 import express, { Express } from "express";
-
 // initialize the express application
+import { calculatePortfolioPerformance } from "./portfolio/portfolioPerformance";
 const app: Express = express();
 
 // respond to GET request at endpoint "/" with message
@@ -18,6 +18,6 @@ app.get("/api/v1/health", (req, res) => {
         version: "1.0.0",
     });
 });
-
+app.use("/api/v1/portfolio/performance", calculatePortfolioPerformance);
 // export app and server for testing
 export default app;
