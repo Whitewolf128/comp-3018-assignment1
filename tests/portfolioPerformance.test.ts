@@ -1,55 +1,52 @@
+// install packages for testing
 import request from "supertest";
-// import supertest request object
-
-import { Response } from "supertest";
-// import supertest Response type
-
 import app from "../src/app";
-
-// import testing
-import { it, expect, describe } from '@jest/globals';
+import { describe, it, expect } from "@jest/globals";
 
 describe("GET /api/v1/portfolio/performance", () => {
-    it("should return portfolio performance summary for a high performing portfolio", async () => {
-        // create GET request to portfolio performance endpoint with query parameters
-        const response: Response = await request(app)
-            .get("/api/v1/portfolio/performance")
-            .query({ initialInvestment: 1000, currentValue: 1500 });
+    // Test case for a high-performing portfolio
+  it("should return a working high performing portfolio summary", async () => {
+    const response = await request(app).get(
+      "/api/v1/portfolio/performance?initialInvestment=1000&currentValue=1300"
+    );
 
-        // assert response status OK and performance object to have specified properties
-        expect(response.status).toBe(200);
-        expect(response.body).toHaveProperty("initialInvestment");
-        expect(response.body).toHaveProperty("currentValue");
-        expect(response.body).toHaveProperty("performance");
-    });
-});
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual(
+      expect.objectContaining({
+        initialInvestment: 1000,
+        currentValue: 1300,
+        performance: expect.anything(),
+      })
+    );
+  });
+    // Test case for a flat portfolio
+  it("should return a working flat portfolio summary", async () => {
+    const response = await request(app).get(
+      "/api/v1/portfolio/performance?initialInvestment=1000&currentValue=1000"
+    );
 
-describe("GET /api/v1/portfolio/performance", () => {
-    it("should return portfolio performance summary for a no change portfolio", async () => {
-        // create GET request to portfolio performance endpoint with query parameters
-        const response: Response = await request(app)
-            .get("/api/v1/portfolio/performance")
-            .query({ initialInvestment: 1000, currentValue: 1000 });
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual(
+      expect.objectContaining({
+        initialInvestment: 1000,
+        currentValue: 1000,
+        performance: expect.anything(),
+      })
+    );
+  });
+    // Test case for a low-performing portfolio
+  it("should return a working low-performing portfolio summary", async () => {
+    const response = await request(app).get(
+      "/api/v1/portfolio/performance?initialInvestment=1000&currentValue=500"
+    );
 
-        // assert response status OK and performance object to have specified properties
-        expect(response.status).toBe(200);
-        expect(response.body).toHaveProperty("initialInvestment");
-        expect(response.body).toHaveProperty("currentValue");
-        expect(response.body).toHaveProperty("performance");
-    });
-});
-
-describe("GET /api/v1/portfolio/performance", () => {
-    it("should return portfolio performance summary for a low performing portfolio", async () => {
-        // create GET request to portfolio performance endpoint with query parameters
-        const response: Response = await request(app)
-            .get("/api/v1/portfolio/performance")
-            .query({ initialInvestment: 1000, currentValue: 500 });
-
-        // assert response status OK and performance object to have specified properties
-        expect(response.status).toBe(200);
-        expect(response.body).toHaveProperty("initialInvestment");
-        expect(response.body).toHaveProperty("currentValue");
-        expect(response.body).toHaveProperty("performance");
-    });
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual(
+      expect.objectContaining({
+        initialInvestment: 1000,
+        currentValue: 500,
+        performance: expect.anything(),
+      })
+    );
+  });
 });
